@@ -1,0 +1,36 @@
+<!-- index.html (ch08www project) -->
+{% extends "base.html" %}
+{% block title %}投票趣{% endblock %}
+{% block content %}
+<div class='container'>
+{% for message in messages %}
+    <div class='alert alert-{{ message.tags }}'>{{ message }}</div>
+{% endfor %}
+<div class='row'>
+    <div class='col-md-12'>
+        <div class='panel panel-default'>
+            <div class='panel-heading' align=center>
+            <h3>欢迎光临</h3>
+                <p>欢迎使用Facebook注册/登录您的账号,以拥有投票和制作投票的功能</p>
+    </div>
+</div>
+        </div>
+    </div>
+        <div class="row">
+            {% for poll in polls %}
+            {% if forloop.first %}
+            <div class="list-group">
+                {% endif %}
+                <a href='{% url "poll-url" poll.id %}' class="list-group-item">{{ poll.name }}</a>
+                {% if forloop.last %}
+            </div>
+            {% endif %}
+            {% empty %}
+            <center><h3>目前并没有活跃中的投票项</h3></center>
+            {% endfor %}
+            <div class="list-group">
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

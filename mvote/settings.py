@@ -22,9 +22,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'ogr$q@nt6i-u3@s%^ixu&wlh*v&dgbv^oc0tl5(s=ju_g7-yig'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 ACCOUNT_ACTIVATION_DAYS = 7
 

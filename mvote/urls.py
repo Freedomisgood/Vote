@@ -17,7 +17,10 @@ from django.contrib import admin
 from mysite import views
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
+    url(r'accounts/',include('registration.backends.hmac.urls')),
     url(r'^$',views.index),
-    url(r'^poll/(\d+)$',views.poll,name = 'poll-url'),
+    url(r'^poll/(\d+)/$',views.poll,name = 'poll-url'),
     url(r'^vote/(\d+)/(\d+)$', views.vote, name='vote-url'),
+    url(r'^login/$',views.login),
+    url(r'^logout/$',views.logout),
 ]

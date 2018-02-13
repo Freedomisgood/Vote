@@ -3,6 +3,10 @@ from django.template.loader import get_template
 from django.http import HttpResponse,request,HttpResponseRedirect
 from django.contrib import messages
 from mysite import models
+from mysite import forms
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate
+from django.contrib import auth
 # Create your views here.
 
 def index(request):
@@ -33,3 +37,32 @@ def vote(request,pollid,pollitemid):
         pollitem.save()
     target_url = '/poll/' + pollid
     return HttpResponseRedirect(target_url)
+
+def login(request):
+    if request.method == 'POST':
+        login_form = forms.LoginForm(request.POST)
+        if login_form.is_valid():
+            login_name = request.POST['username'].strip()
+            login_password = request.POST['password']
+            user = authenticate(username=login_name,password = login_password)
+            if user is not None:
+                if user.is_active:
+                    auth.login(request,user)
+                    messages.add_message(request,messages.SUCCESS,'成功登陆')
+                    return HttpResponseRedirect('/')
+                else:
+                    messages.add_message(request,messages.WARNING,'账号尚未启用')
+            else:
+                messages.add_message(request, messages.WARNING, '登录失败')
+        else:
+            messages.add_message(request,messages.INFO,'请检查输入的字段内容')
+    else:
+        login_form = forms.LoginForm()
+    template = get_template('login.html')
+    html = template.render(context=locals(),request = request)
+    return HttpResponse(html)
+
+def logout(request):
+    auth.logout(request)
+    messages.add_message(request,messages.INFO,'成功注销')
+    return HttpResponseRedirect('/')

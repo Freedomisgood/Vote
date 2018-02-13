@@ -22,11 +22,20 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'ogr$q@nt6i-u3@s%^ixu&wlh*v&dgbv^oc0tl5(s=ju_g7-yig'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = []
 
+ACCOUNT_ACTIVATION_DAYS = 7
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_FROM = '1063052964@qq.com'
+EMAIL_USE_SSL = True
+EMAIL_HOST = 'smtp.qq.com'
+EMAIL_PORT = 465
+DEFAULT_FROM_EMAIL = 'Website <1063052964@qq.com>'
+EMAIL_HOST_USER = EMAIL_FROM
+EMAIL_HOST_PASSWORD = 'pykhotuhghdjbeci'
 # Application definition
 
 INSTALLED_APPS = (
@@ -100,5 +109,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
-# 加入下面的配置
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = [os.path.join(BASE_DIR,'static')]
+STATIC_ROOT = "/home/nymrli/mvote/staticfiles/"

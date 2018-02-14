@@ -1,3 +1,5 @@
+confusable-homoglyphs==3.0.0
 Django==1.8.18
+django-registration==2.4.1
 Markdown==2.6.11
 Pygments==2.2.0
